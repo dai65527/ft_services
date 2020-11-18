@@ -6,12 +6,18 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/18 14:19:09 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/18 16:47:33 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # use alpine as baseimage
 FROM    alpine:latest
+
+# setting of database for wordpress (used to make wp-config.php in start.sh)
+ENV     WP_DBNAME wordpress
+ENV     WP_DBUSER wpdbuser
+ENV     WP_DBPASS wpdbpass
+ENV     WP_DBHOST localhost
 
 # install nginx and openssl
 RUN     apk update && apk add --no-cache \
