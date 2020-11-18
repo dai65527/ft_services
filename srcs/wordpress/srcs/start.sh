@@ -2,4 +2,7 @@
 
 # Start nginx and php-fpm
 echo [wordpress] starting...
-/usr/bin/mysqld_safe --datadir='/var/lib/mysql'
+php-fpm7
+nginx
+
+tail -f /var/log/nginx/access.log
