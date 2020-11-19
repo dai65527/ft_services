@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 17:55:57 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/19 23:36:39 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/20 07:36:33 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,13 @@ RUN     sed -i \
             /etc/vsftpd/vsftpd.conf \
         && echo seccomp_sandbox=NO >> /etc/vsftpd/vsftpd.conf \
         && echo pasv_min_port=60000 >> /etc/vsftpd/vsftpd.conf \
-        && echo pasv_max_port=60002 >> /etc/vsftpd/vsftpd.conf
+        && echo pasv_max_port=60002 >> /etc/vsftpd/vsftpd.conf \
+        && echo log_ftp_protocol=YES >> /etc/vsftpd/vsftpd.conf \
+        && echo debug_ssl=YES >> /etc/vsftpd/vsftpd.conf \
+        && echo vsftpd_log_file=/var/log/vsftpd.log >> /etc/vsftpd/vsftpd.conf \
+        && echo ssl_enable=YES >> /etc/vsftpd/vsftpd.conf \
+        && echo rsa_cert_file=/etc/vsftpd/ssl/server.crt >> /etc/vsftpd/vsftpd.conf \
+        && echo rsa_private_key_file=/etc/vsftpd/ssl/server.key >> /etc/vsftpd/vsftpd.conf
 
 # set start.sh
 COPY    ./srcs/start.sh /start.sh

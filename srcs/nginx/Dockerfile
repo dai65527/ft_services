@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/19 19:37:45 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/20 07:55:59 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,9 +27,14 @@ RUN     apk update && apk add --no-cache \
 ## install lftp for check ftps
         lftp
 
-# setting for nginx
+# configure of nginx
 RUN     mkdir -p /run/nginx
 COPY    ./srcs/default.conf /etc/nginx/conf.d/default.conf
+
+# cofigure of lftp
+# allowing lftp to ignore self signed certificate 
+# (just for test. should be removed for practical use)
+RUN     echo "set ssl:verify-certificate no" >> /etc/lftp.conf
 
 # set start.sh
 COPY    ./srcs/start.sh /start.sh
