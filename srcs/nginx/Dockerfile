@@ -6,30 +6,35 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/17 19:57:55 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/19 16:47:19 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # use alpine as baseimage
 FROM    alpine:latest
 
-# install nginx and openssl
+# env
+ENV     USER_SSH user42
+ENV     USER_SSH_PASS user42
+ENV     LOGIN_TITLE FT_SERVICES
+
+# install nginx, openssl and openssh (and figlet haha)
 RUN     apk update && apk add --no-cache \
-        vim \
         nginx \
-        openssl
+        openssl \
+        openssh \
+        figlet
 
-RUN     mkdir /etc/nginx/ssl \
-        && openssl req -newkey rsa:2048 \
-                       -x509 \
-                       -sha256 \
-                       -days 3650 \
-                       -nodes \
-                       -out /etc/nginx/ssl/server.crt \
-                       -keyout /etc/nginx/ssl/server.key \
-                       -subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo/OU=Student/CN=localhost"
-
+# setting for nginx
 RUN     mkdir -p /run/nginx
 COPY    ./srcs/default.conf /etc/nginx/conf.d/default.conf
 
-CMD     [ "sh" ]
+# set start.sh
+COPY    ./srcs/start.sh /start.sh
+RUN     chmod 744 /start.sh
+
+# copy login message
+COPY    ./srcs/login_message.txt /tmp
+
+CMD     [ "/start.sh" ]
+# CMD     [ "sh" ]
