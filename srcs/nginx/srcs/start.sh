@@ -11,12 +11,10 @@
 #                                                                              #
 # **************************************************************************** #
 
-# initialize ssh-config
+# initialize ssh
 if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
     ## generate host key
     ssh-keygen -A
-    ## add user for ssh connection
-    echo -e "$USER_SSH_PASS\n$USER_SSH_PASS" | adduser $USER_SSH
     ## edit login message
     if [ $LOGIN_TITLE != "" ]; then
         echo $LOGIN_TITLE | figlet > /etc/motd
@@ -24,6 +22,11 @@ if [ ! -f /etc/ssh/ssh_host_rsa_key ]; then
     fi
     cat /tmp/login_message.txt >> /etc/motd
     echo >> /etc/motd
+fi
+
+# add user for ssh connection
+if [ ! -d /home/$USER_SSH ]; then
+    echo -e "$USER_SSH_PASS\n$USER_SSH_PASS" | adduser $USER_SSH
 fi
 
 # initialize ssl-config

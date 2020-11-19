@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/19 16:47:19 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/19 19:37:45 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,9 @@ RUN     apk update && apk add --no-cache \
         nginx \
         openssl \
         openssh \
-        figlet
+        figlet \
+## install lftp for check ftps
+        lftp
 
 # setting for nginx
 RUN     mkdir -p /run/nginx
@@ -37,4 +39,3 @@ RUN     chmod 744 /start.sh
 COPY    ./srcs/login_message.txt /tmp
 
 CMD     [ "/start.sh" ]
-# CMD     [ "sh" ]
