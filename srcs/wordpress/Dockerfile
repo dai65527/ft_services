@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/18 16:47:33 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/19 09:10:04 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ FROM    alpine:latest
 ENV     WP_DBNAME wordpress
 ENV     WP_DBUSER wpdbuser
 ENV     WP_DBPASS wpdbpass
-ENV     WP_DBHOST localhost
+ENV     WP_DBHOST mysql
 
 # install nginx and openssl
 RUN     apk update && apk add --no-cache \

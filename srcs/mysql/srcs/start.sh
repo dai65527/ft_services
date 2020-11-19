@@ -1,8 +1,6 @@
 #!/bin/sh
 
 # If no mysql data directory (means firsttime launch), initialize.
-##  MEMO:
-##      FLUSH
 if [ ! -d /run/mysqld ]; then
 echo [database] initializing...
 DB_SYSPASS=`pwgen 32 1`
@@ -10,18 +8,20 @@ DB_SYSPASS=`pwgen 32 1`
 USE mysql;
 FLUSH PRIVILEGES ;
 GRANT ALL ON *.* TO 'root'@'%' identified by '$DB_ROOTPASS' WITH GRANT OPTION ;
+GRANT ALL ON *.* TO 'root'@'$WP_HOST' identified by '$DB_ROOTPASS' WITH GRANT OPTION ;
 GRANT ALL ON *.* TO 'root'@'localhost' identified by '$DB_ROOTPASS' WITH GRANT OPTION ;
 SET PASSWORD FOR 'root'@'localhost'=PASSWORD('${DB_ROOTPASS}') ;
 SET PASSWORD FOR 'mariadb.sys'@'localhost'=PASSWORD('${DB_SYSPASS}') ;
 DROP DATABASE IF EXISTS test ;
 CREATE DATABASE IF NOT EXISTS \`$WP_DBNAME\` CHARACTER SET utf8 COLLATE utf8_general_ci;
-GRANT ALL ON \`$WP_DBNAME\`.* to '$WP_DBUSER'@'$WP_DBHOST' IDENTIFIED BY '$WP_DBPASS';
+GRANT ALL ON \`$WP_DBNAME\`.* to '$WP_DBUSER'@'localhost' IDENTIFIED BY '$WP_DBPASS';
+GRANT ALL ON \`$WP_DBNAME\`.* to '$WP_DBUSER'@'$WP_HOST' IDENTIFIED BY '$WP_DBPASS';
 DELETE FROM mysql.user WHERE Password="";
 FLUSH PRIVILEGES ;
 EOF
     /usr/bin/mysqld --user=mysql --bootstrap < init.sql
-    rm init.sql
+    rm -f init.sql
 fi
 
 echo [mysql] starting...
-/usr/bin/mysqld_safe --datadir='/var/lib/mysql'
+/usr/bin/mysqld_safe --datadir='/var/lib/mysql' --plugin-dir=/usr/lib/mariadb/plugin
