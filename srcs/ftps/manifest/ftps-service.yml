@@ -1,0 +1,41 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    ftps-service.yml                                   :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/20 19:18:10 by dnakano           #+#    #+#              #
+#    Updated: 2020/11/21 08:14:47 by dnakano          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: ftps
+spec:
+  type: ClusterIP
+  selector:
+    app: ftps
+  ports:
+  - port: 21
+    targetPort: 21
+    name: ftps-connect
+    protocol: TCP
+  - port: 60000
+    targetPort: 60000
+    name: ftps-transport-0
+    protocol: TCP
+  - port: 60001
+    targetPort: 60001
+    name: ftps-transport-1
+    protocol: TCP
+  - port: 60002
+    targetPort: 60002
+    name: ftps-transport-2
+    protocol: TCP
+  - port: 60003
+    targetPort: 60003
+    name: ftps-transport-3
+    protocol: TCP
