@@ -21,5 +21,27 @@ docker build -t ft_services/nginx ./srcs/nginx
 docker build -t ft_services/mysql ./srcs/mysql
 docker build -t ft_services/ftps ./srcs/ftps
 
-# apply kubernetes manifest
+# setup metallb (https://metallb.universe.tf/installation/)
+## enable strict ARP mode (needed)
+eval $(minikube docker-env --unset)
+### display what would be changed
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl diff -f - -n kube-system
+### apply change
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" | \
+kubectl apply -f - -n kube-system
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e s/'mode: ""'/'mode: "ipvs"'/ | \
+kubectl apply -f - -n kube-system
+### install metallb by manifest 
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+### (On first install only)
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+### apply config
+kubectl apply -f ./srcs/metallb/metallb-config.yml
 
+# apply kubernetes manifest
+./srcs/scripts/apply.sh
