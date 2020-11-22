@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/19 09:10:04 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/22 09:02:41 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -64,6 +64,7 @@ RUN     apk add --no-cache \
 # copy wordpress sources to page root
 RUN     rm -rf /var/lib/nginx/html
 COPY    ./srcs/wordpress_srcs /var/lib/nginx/html
+RUN     chown -R nginx:nginx /var/lib/nginx/html
 
 # settings for nginx and php
 RUN     mkdir -p /run/nginx

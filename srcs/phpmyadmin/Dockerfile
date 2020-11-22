@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/19 14:50:54 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/22 09:01:31 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -62,6 +62,7 @@ RUN     apk add --no-cache \
 RUN     rm -r /var/lib/nginx/html/* \
         && wget -P /tmp https://files.phpmyadmin.net/phpMyAdmin/5.0.4/phpMyAdmin-5.0.4-all-languages.tar.gz \
         && tar xvf /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz --strip-components=1 -C /var/lib/nginx/html \
+        && chown -R nginx:nginx /var/lib/nginx/html \
         && rm -f /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz
 
 # settings for nginx and php
