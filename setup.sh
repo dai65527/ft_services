@@ -13,7 +13,7 @@
 
 # build docker image
 ## build to minikube env
-eval $(minikube docker-env)
+# eval $(minikube docker-env)
 ## build each containers
 docker build -t ft_services/wordpress ./srcs/wordpress
 docker build -t ft_services/phpmyadmin ./srcs/phpmyadmin
@@ -23,17 +23,16 @@ docker build -t ft_services/ftps ./srcs/ftps
 
 # setup metallb (https://metallb.universe.tf/installation/)
 ## enable strict ARP mode (needed)
-eval $(minikube docker-env --unset)
+# eval $(minikube docker-env --unset)
 ### display what would be changed
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
+sed -e "s/strictARP: false/strictARP: true/" \
+    -e s/'mode: ""'/'mode: "ipvs"'/ | \
 kubectl diff -f - -n kube-system
 ### apply change
 kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" | \
-kubectl apply -f - -n kube-system
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e s/'mode: ""'/'mode: "ipvs"'/ | \
+sed -e "s/strictARP: false/strictARP: true/" \
+    -e s/'mode: ""'/'mode: "ipvs"'/ | \
 kubectl apply -f - -n kube-system
 ### install metallb by manifest 
 kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
