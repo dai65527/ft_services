@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/20 07:55:59 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/22 11:05:26 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -30,6 +30,11 @@ RUN     apk update && apk add --no-cache \
 # configure of nginx
 RUN     mkdir -p /run/nginx
 COPY    ./srcs/default.conf /etc/nginx/conf.d/default.conf
+
+# add index.html
+RUN     rm -f /var/lib/nginx/html/*index*.html
+COPY    ./srcs/index.html /var/lib/nginx/html/index.html
+RUN     chown -R nginx:nginx /var/lib/nginx/html
 
 # cofigure of lftp
 # allowing lftp to ignore self signed certificate 
