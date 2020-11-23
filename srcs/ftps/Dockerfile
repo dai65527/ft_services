@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 17:55:57 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/20 07:36:33 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/23 15:33:37 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,10 +17,13 @@ ENV     FTP_USER user42
 ENV     FTP_USER_PASS user42
 
 # install openssl
-RUN     apk update && apk add --no-cache \
-        vsftpd \
-        vim \
-        openssl
+RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+            >> /etc/apk/repositories \
+        && apk update && apk add --no-cache \
+            vsftpd \
+            openssl \
+# install telegraf to store metrix data to influxdb
+            telegraf@testing
 
 # ftpd config
 # http://park12.wakwak.com/~eslab/pcmemo/linux/vsftpd/vsftpd2.html
@@ -38,6 +41,12 @@ RUN     sed -i \
         && echo ssl_enable=YES >> /etc/vsftpd/vsftpd.conf \
         && echo rsa_cert_file=/etc/vsftpd/ssl/server.crt >> /etc/vsftpd/vsftpd.conf \
         && echo rsa_private_key_file=/etc/vsftpd/ssl/server.key >> /etc/vsftpd/vsftpd.conf
+
+# telegraf config
+RUN     sed -i \
+            -e s/'hostname = ""'/'hostname = "ftps"'/ \
+            -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
+            /etc/telegraf.conf
 
 # set start.sh
 COPY    ./srcs/start.sh /start.sh

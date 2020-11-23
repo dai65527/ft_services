@@ -18,9 +18,24 @@ if [ ! -f /var/lib/nginx/html/config.inc.php ]; then
     chown nginx:nginx /var/lib/nginx/html
 fi
 
+# initialize ssl-config
+if [ ! -d /etc/nginx/ssl ]; then
+    mkdir /etc/nginx/ssl
+    openssl req -newkey rsa:2048 \
+                -sha256 \
+                -x509 \
+                -days 3650 \
+                -nodes \
+                -out /etc/nginx/ssl/server.crt \
+                -keyout /etc/nginx/ssl/server.key \
+                -subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo/OU=Student/CN=localhost"
+fi
+
 # Start nginx and php-fpm
-echo [phpmyadmin] starting...
 php-fpm7
 nginx
+
+# start telegraf server
+(telegraf --config /etc/telegraf.conf) &
 
 tail -f /var/log/nginx/access.log

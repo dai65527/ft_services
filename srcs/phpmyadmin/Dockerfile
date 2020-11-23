@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/22 09:01:31 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/23 15:36:02 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,19 +18,13 @@ ENV     DBHOST mysql
 
 # install nginx and openssl
 RUN     apk update && apk add --no-cache \
-                nginx \
-                openssl
-
-# setup ssl
-RUN     mkdir /etc/nginx/ssl \
-        && openssl req -newkey rsa:2048 \
-                       -x509 \
-                       -sha256 \
-                       -days 3650 \
-                       -nodes \
-                       -out /etc/nginx/ssl/server.crt \
-                       -keyout /etc/nginx/ssl/server.key \
-                       -subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo/OU=Student/CN=localhost"
+RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+            >> /etc/apk/repositories \
+        && apk update && apk add --no-cache \
+            nginx \
+            openssl \
+# install telegraf to store metrix data to influxdb
+            telegraf@testing
 
 # install php and extension package needed by wordpress
 RUN     apk add --no-cache \
@@ -64,6 +58,12 @@ RUN     rm -r /var/lib/nginx/html/* \
         && tar xvf /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz --strip-components=1 -C /var/lib/nginx/html \
         && chown -R nginx:nginx /var/lib/nginx/html \
         && rm -f /tmp/phpMyAdmin-5.0.4-all-languages.tar.gz
+
+# telegraf config
+RUN     sed -i \
+            -e s/'hostname = ""'/'hostname = "phpmyadmin"'/ \
+            -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
+            /etc/telegraf.conf
 
 # settings for nginx and php
 RUN     mkdir -p /run/nginx \

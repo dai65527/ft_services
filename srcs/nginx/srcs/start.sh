@@ -43,8 +43,10 @@ if [ ! -d /etc/nginx/ssl ]; then
 fi
 
 # Start nginx and sshd
-echo [nginx] starting...
 nginx
 /usr/sbin/sshd
+
+# start telegraf
+(telegraf --config /etc/telegraf.conf) &
 
 tail -f /var/log/nginx/access.log

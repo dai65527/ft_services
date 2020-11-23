@@ -22,5 +22,7 @@ EOF
     rm -f init.sql
 fi
 
-echo [mysql] starting...
+# start telegraf server
+(telegraf --config /etc/telegraf.conf) &
+
 /usr/bin/mysqld_safe --datadir='/var/lib/mysql' --plugin-dir=/usr/lib/mariadb/plugin

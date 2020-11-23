@@ -32,4 +32,7 @@ fi
 # start vsftpd (ftps server)
 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
 
+# start telegraf server
+(telegraf --config /etc/telegraf.conf) &
+
 tail -f /var/log/vsftpd.log

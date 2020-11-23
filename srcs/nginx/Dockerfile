@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/22 11:05:26 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/23 15:33:21 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,13 +19,15 @@ ENV     USER_SSH_PASS user42
 ENV     LOGIN_TITLE FT_SERVICES
 
 # install nginx, openssl and openssh (and figlet haha)
-RUN     apk update && apk add --no-cache \
-        nginx \
-        openssl \
-        openssh \
-        figlet \
-## install lftp for check ftps
-        lftp
+RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+            >> /etc/apk/repositories \
+        && apk update && apk add --no-cache \
+            nginx \
+            openssl \
+            openssh \
+            figlet \
+# install telegraf to store metrix data to influxdb
+            telegraf@testing
 
 # configure of nginx
 RUN     mkdir -p /run/nginx
@@ -40,6 +42,12 @@ RUN     chown -R nginx:nginx /var/lib/nginx/html
 # allowing lftp to ignore self signed certificate 
 # (just for test. should be removed for practical use)
 RUN     echo "set ssl:verify-certificate no" >> /etc/lftp.conf
+
+# configure of telegraf
+RUN     sed -i \
+            -e s/'hostname = ""'/'hostname = "nginx"'/ \
+            -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
+            /etc/telegraf.conf
 
 # set start.sh
 COPY    ./srcs/start.sh /start.sh
