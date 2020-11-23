@@ -1,0 +1,45 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Dockerfile                                         :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
+#    Updated: 2020/11/23 16:26:34 by dnakano          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+FROM    alpine:latest
+
+# env vars for config
+ENV     GRAFANA_DBUSER user42
+ENV     GRAFANA_DBPASS user42
+
+# install grafana
+RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+            >> /etc/apk/repositories \
+        && apk update && apk add --no-cache \
+            grafana@testing \
+# install telegraf to store metrix data to influxdb
+            telegraf@testing
+
+# grafana config
+RUN     sed -i \
+            -e s/";data = \/var\/lib\/grafana"/"data = \/var\/lib\/grafana"/ \
+            -e s/";log = \/var\/log\/grafana"/"log = \/var\/log\/grafana"/ \
+            -e s/";plugins = \/var\/lib\/grafana\/plugins"/"plugins = \/var\/lib\/grafana\/plugins"/ \
+            -e s/";provisioning = conf\/provisioning"/"provisioning = conf\/provisioning"/ \
+            /etc/grafana.ini
+
+# telegraf config
+RUN     sed -i \
+            -e s/'hostname = ""'/'hostname = "grafana"'/ \
+            -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
+            /etc/telegraf.conf
+
+# set start.sh
+COPY    ./srcs/start.sh /start.sh
+RUN     chmod 744 /start.sh
+
+CMD     [ "/start.sh" ]
