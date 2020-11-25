@@ -1,8 +1,18 @@
 #!/bin/sh
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    start.sh                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/25 18:49:07 by dnakano           #+#    #+#              #
+#    Updated: 2020/11/25 18:49:07 by dnakano          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-# If no mysql data directory (means firsttime launch), initialize.
+# If no mysql data directory (means firsttime to launch), initialize.
 if [ ! -d /run/mysqld ]; then
-echo [database] initializing...
 DB_SYSPASS=`pwgen 32 1`
     cat << EOF > init.sql
 USE mysql;
