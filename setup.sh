@@ -18,6 +18,8 @@ docker build -t ft_services/phpmyadmin ./srcs/phpmyadmin
 docker build -t ft_services/nginx ./srcs/nginx
 docker build -t ft_services/mysql ./srcs/mysql
 docker build -t ft_services/ftps ./srcs/ftps
+docker build -t ft_services/grafana ./srcs/grafana
+docker build -t ft_services/influxdb ./srcs/influxdb
 
 # setup metallb (https://metallb.universe.tf/installation/)
 ## enable strict ARP mode (needed)

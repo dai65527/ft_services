@@ -1,22 +1,28 @@
-#!/bin/sh
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    apply.sh                                           :+:      :+:    :+:    #
+#    grafana-service.yml                                :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/11/21 09:42:24 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/21 09:42:24 by dnakano          ###   ########.fr        #
+#    Created: 2020/11/20 19:18:10 by dnakano           #+#    #+#              #
+#    Updated: 2020/11/25 19:20:42 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# apply k8s manifest of ft_services container
-kubectl apply -f ./srcs/influxdb/manifest
-kubectl apply -f ./srcs/grafana/manifest
-kubectl apply -f srcs/metallb/metallb-config.yml
-kubectl apply -f ./srcs/wordpress/manifest
-kubectl apply -f ./srcs/phpmyadmin/manifest
-kubectl apply -f ./srcs/nginx/manifest
-kubectl apply -f ./srcs/mysql/manifest
-kubectl apply -f ./srcs/ftps/manifest
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  annotations:
+    metallb.universe.tf/allow-shared-ip: ft_services
+spec:
+  type: LoadBalancer
+  loadBalancerIP: 192.168.1.200
+  selector:
+    app: grafana
+  ports:
+  - port: 3000
+    targetPort: 3000
+    name: https
+    protocol: TCP
