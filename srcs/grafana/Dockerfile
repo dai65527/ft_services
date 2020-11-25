@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 18:39:29 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 19:26:10 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,4 +47,4 @@ RUN     sed -i \
 COPY    ./srcs/start.sh /start.sh
 RUN     chmod 744 /start.sh
 
-CMD     [ "/start.sh" ]
+ENTRYPOINT [ "/start.sh" ]

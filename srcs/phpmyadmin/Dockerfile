@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 18:39:13 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 19:26:45 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,4 +80,4 @@ COPY    ./srcs/www.conf /etc/php7/php-fpm.d/www.conf
 COPY    ./srcs/start.sh /start.sh
 RUN     chmod 744 /start.sh
 
-CMD     [ "/start.sh" ]
+ENTRYPOINT [ "/start.sh" ]

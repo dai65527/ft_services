@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 18:39:07 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 19:26:34 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -60,4 +60,4 @@ RUN     chmod 744 /start.sh
 # copy login message
 COPY    ./srcs/login_message.txt /tmp
 
-CMD     [ "/start.sh" ]
+ENTRYPOINT [ "/start.sh" ]
