@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 15:33:21 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:39:07 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,10 @@ FROM    alpine:latest
 ENV     USER_SSH user42
 ENV     USER_SSH_PASS user42
 ENV     LOGIN_TITLE FT_SERVICES
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install nginx, openssl and openssh (and figlet haha)
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \

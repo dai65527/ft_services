@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 15:36:09 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:39:18 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,10 @@ ENV     WP_DBNAME wordpress
 ENV     WP_DBUSER wpdbuser
 ENV     WP_DBPASS wpdbpass
 ENV     WP_DBHOST mysql
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install nginx and openssl
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
@@ -56,6 +60,7 @@ RUN     apk add --no-cache \
 # telegraf config
 RUN     sed -i \
             -e s/'hostname = ""'/'hostname = "wordpress"'/ \
+            -e s/'# database = "telegraf"'/'database = "telegraf"'/ \
             -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
             /etc/telegraf.conf
 

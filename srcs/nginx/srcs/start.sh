@@ -42,6 +42,12 @@ if [ ! -d /etc/nginx/ssl ]; then
                 -subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo/OU=Student/CN=localhost"
 fi
 
+# telegraf conf
+sed -i \
+    -e s/"# username = \"telegraf\""/"username = \"$INFDB_TELEGRAF_USER\""/ \
+    -e s/"# password = \"metricsmetricsmetricsmetrics\""/"password = \"$INFDB_TELEGRAF_PASS\""/ \
+    /etc/telegraf.conf
+
 # Start nginx and sshd
 nginx
 /usr/sbin/sshd

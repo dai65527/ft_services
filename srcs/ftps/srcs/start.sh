@@ -29,6 +29,12 @@ if [ ! -d /home/$FTP_USER ]; then
     echo -e "$FTP_USER_PASS\n$FTP_USER_PASS" | adduser $FTP_USER
 fi
 
+# telegraf conf
+sed -i \
+    -e s/"# username = \"telegraf\""/"username = \"$INFDB_TELEGRAF_USER\""/ \
+    -e s/"# password = \"metricsmetricsmetricsmetrics\""/"password = \"$INFDB_TELEGRAF_PASS\""/ \
+    /etc/telegraf.conf
+
 # start vsftpd (ftps server)
 /usr/sbin/vsftpd /etc/vsftpd/vsftpd.conf
 

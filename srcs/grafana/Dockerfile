@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 16:26:34 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:39:29 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@ FROM    alpine:latest
 # env vars for config
 ENV     GRAFANA_DBUSER user42
 ENV     GRAFANA_DBPASS user42
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install grafana
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
@@ -35,6 +39,7 @@ RUN     sed -i \
 # telegraf config
 RUN     sed -i \
             -e s/'hostname = ""'/'hostname = "grafana"'/ \
+            -e s/'# database = "telegraf"'/'database = "telegraf"'/ \
             -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
             /etc/telegraf.conf
 

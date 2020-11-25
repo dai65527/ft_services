@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 17:55:57 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 15:33:37 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:39:24 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,12 @@ FROM    alpine:latest
 
 ENV     FTP_USER user42
 ENV     FTP_USER_PASS user42
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install openssl
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
@@ -45,6 +51,7 @@ RUN     sed -i \
 # telegraf config
 RUN     sed -i \
             -e s/'hostname = ""'/'hostname = "ftps"'/ \
+            -e s/'# database = "telegraf"'/'database = "telegraf"'/ \
             -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
             /etc/telegraf.conf
 

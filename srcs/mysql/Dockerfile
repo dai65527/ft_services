@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 15:29:06 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 15:33:13 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:38:58 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,6 +19,10 @@ ENV     DB_ROOTPASS=rootpass
 ENV     WP_DBNAME wordpress
 ENV     WP_DBUSER wpdbuser
 ENV     WP_DBPASS wpdbpass
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # Install MariaDB (alternative to MySQL)
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
@@ -40,6 +44,7 @@ RUN     /usr/bin/mysql_install_db --user=mysql \
 # telegraf config
 RUN     sed -i \
             -e s/'hostname = ""'/'hostname = "mysql"'/ \
+            -e s/'# database = "telegraf"'/'database = "telegraf"'/ \
             -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
             /etc/telegraf.conf
 

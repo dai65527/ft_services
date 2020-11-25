@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/23 15:36:02 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/25 18:39:13 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,10 @@ FROM    alpine:latest
 
 # setting of database for phpmyadmin
 ENV     DBHOST mysql
+
+# user and pass of influxdb for telegraf
+ENV     INFDB_TELEGRAF_USER telegraf
+ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install nginx and openssl
 RUN     apk update && apk add --no-cache \
@@ -62,6 +66,7 @@ RUN     rm -r /var/lib/nginx/html/* \
 # telegraf config
 RUN     sed -i \
             -e s/'hostname = ""'/'hostname = "phpmyadmin"'/ \
+            -e s/'# database = "telegraf"'/'database = "telegraf"'/ \
             -e s/'# urls = \["http:\/\/127.0.0.1:8086"\]'/'urls = \["http:\/\/influxdb:8086"\]'/ \
             /etc/telegraf.conf
 

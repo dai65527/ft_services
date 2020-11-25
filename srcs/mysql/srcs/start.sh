@@ -22,6 +22,12 @@ EOF
     rm -f init.sql
 fi
 
+# telegraf conf
+sed -i \
+    -e s/"# username = \"telegraf\""/"username = \"$INFDB_TELEGRAF_USER\""/ \
+    -e s/"# password = \"metricsmetricsmetricsmetrics\""/"password = \"$INFDB_TELEGRAF_PASS\""/ \
+    /etc/telegraf.conf
+
 # start telegraf server
 (telegraf --config /etc/telegraf.conf) &
 
