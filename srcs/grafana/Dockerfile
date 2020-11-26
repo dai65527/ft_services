@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:26:10 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/26 16:01:41 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,6 +25,7 @@ RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
             >> /etc/apk/repositories \
         && apk update && apk add --no-cache \
             grafana@testing \
+            openssl \
 # install telegraf to store metrix data to influxdb
             telegraf@testing
 
@@ -34,6 +35,9 @@ RUN     sed -i \
             -e s/";log = \/var\/log\/grafana"/"log = \/var\/log\/grafana"/ \
             -e s/";plugins = \/var\/lib\/grafana\/plugins"/"plugins = \/var\/lib\/grafana\/plugins"/ \
             -e s/";provisioning = conf\/provisioning"/"provisioning = conf\/provisioning"/ \
+            -e s/";cert_file ="/"cert_file = \/etc\/grafana\/ssl\/server.crt"/ \
+            -e s/";cert_key ="/"cert_key = \/etc\/grafana\/ssl\/server.key"/ \
+            -e s/";protocol = http"/"protocol = https"/ \
             /etc/grafana.ini
 
 # telegraf config

@@ -19,6 +19,19 @@ sed -i \
     -e s/"# password = \"metricsmetricsmetricsmetrics\""/"password = \"$INFDB_TELEGRAF_PASS\""/ \
     /etc/telegraf.conf
 
+# initialize ssl-config
+if [ ! -d /etc/grafana/ssl ]; then
+    mkdir -p /etc/grafana/ssl
+    openssl req -newkey rsa:2048 \
+                -sha256 \
+                -x509 \
+                -days 3650 \
+                -nodes \
+                -out /etc/grafana/ssl/server.crt \
+                -keyout /etc/grafana/ssl/server.key \
+                -subj "/C=JP/ST=Tokyo/L=Minato-ku/O=42tokyo/OU=Student/CN=localhost"
+fi
+
 # start telegraf server
 (telegraf --config /etc/telegraf.conf) &
 
