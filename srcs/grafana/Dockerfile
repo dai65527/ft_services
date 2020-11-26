@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/26 17:34:14 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/26 18:44:51 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,7 +42,8 @@ RUN     sed -i \
 
 # add grafana provisioning
 # https://grafana.com/docs/grafana/latest/administration/provisioning/
-COPY    ./srcs/provisioning/datasource.yml /usr/share/grafana/conf/provisioning/datasources/
+COPY    ./srcs/provisioning/datasource.yml /usr/share/grafana/conf/provisioning/datasources
+COPY    ./srcs/provisioning/dashboards /usr/share/grafana/conf/provisioning/dashboards
 
 # telegraf config
 RUN     sed -i \
