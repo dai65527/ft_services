@@ -17,6 +17,8 @@ kubectl delete -f ./srcs/phpmyadmin/manifest
 kubectl delete -f ./srcs/nginx/manifest
 kubectl delete -f ./srcs/mysql/manifest
 kubectl delete -f ./srcs/ftps/manifest
+kubectl delete -f ./srcs/influxdb/manifest
+kubectl delete -f ./srcs/grafana/manifest
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 
