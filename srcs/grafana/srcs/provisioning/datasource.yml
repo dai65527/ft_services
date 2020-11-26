@@ -1,0 +1,26 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    datasource.yml                                     :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2020/11/26 16:46:54 by dnakano           #+#    #+#              #
+#    Updated: 2020/11/26 17:28:43 by dnakano          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+apiVersion: 1
+
+datasources:
+  - name: influxdb
+    type: influxdb
+    access: proxy
+    url: http://influxdb:8086
+    user: $INFDB_TELEGRAF_USER
+    secureJsonData:
+      password: $INFDB_TELEGRAF_PASS
+    database: telegraf
+    isDefault: true
+    version: 1
+    editable: true

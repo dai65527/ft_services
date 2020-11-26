@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/26 16:01:41 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/26 17:34:14 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,10 @@ RUN     sed -i \
             -e s/";cert_key ="/"cert_key = \/etc\/grafana\/ssl\/server.key"/ \
             -e s/";protocol = http"/"protocol = https"/ \
             /etc/grafana.ini
+
+# add grafana provisioning
+# https://grafana.com/docs/grafana/latest/administration/provisioning/
+COPY    ./srcs/provisioning/datasource.yml /usr/share/grafana/conf/provisioning/datasources/
 
 # telegraf config
 RUN     sed -i \
