@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:26:45 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/27 08:00:51 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,7 +21,6 @@ ENV     INFDB_TELEGRAF_USER telegraf
 ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install nginx and openssl
-RUN     apk update && apk add --no-cache \
 RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
             >> /etc/apk/repositories \
         && apk update && apk add --no-cache \
