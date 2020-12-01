@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 11:55:38 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 18:17:55 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/28 07:48:46 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,10 +29,10 @@ RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
 
 # influxdb config
 ## add default admin user
-RUN     (/usr/sbin/influxd -config /etc/influxdb.conf) & \
-        sleep 5 \
-        && influx -host 127.0.0.1 -port 8086 \
-            -execute "CREATE USER admintmp WITH PASSWORD 'admintmppass' WITH ALL PRIVILEGES"
+# RUN     (/usr/sbin/influxd -config /etc/influxdb.conf) & \
+#         sleep 5 \
+#         && influx -host 127.0.0.1 -port 8086 \
+#             -execute "CREATE USER admintmp WITH PASSWORD 'admintmppass' WITH ALL PRIVILEGES"
 
 RUN     sed -i \
             -e s/"# auth-enabled = false"/"auth-enabled = true"/ \

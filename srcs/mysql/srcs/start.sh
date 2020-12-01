@@ -11,8 +11,16 @@
 #                                                                              #
 # **************************************************************************** #
 
+echo =====
+    ls /var/lib/mysql
+echo =====
 # If no mysql data directory (means firsttime to launch), initialize.
-if [ ! -d /run/mysqld ]; then
+if [ ! -d /var/lib/mysql/wordpress ]; then
+/usr/bin/mysql_install_db --user=mysql \
+                          --datadir=/var/lib/mysql \
+                          --auth-root-authentication-method=normal
+sed -i -e s/skip-networking/"# skip-networking"/ \
+    /etc/my.cnf.d/mariadb-server.cnf 
 DB_SYSPASS=`pwgen 32 1`
     cat << EOF > init.sql
 USE mysql;
@@ -30,7 +38,13 @@ FLUSH PRIVILEGES ;
 EOF
     /usr/bin/mysqld --user=mysql --bootstrap < init.sql
     rm -f init.sql
+echo =====
+    ls /var/lib/mysql
+echo =====
 fi
+echo =====
+ls /var/lib/mysql
+echo =====
 
 # telegraf conf
 sed -i \

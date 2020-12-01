@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:03:11 by dnakano          ###   ########.fr        #
+#    Updated: 2020/11/27 19:45:40 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,7 +23,14 @@ spec:
       labels:
         app: influxdb
     spec:
+      volumes:
+      - name: influxdb-volume
+        persistentVolumeClaim:
+          claimName: influxdb-pvc
       containers:
       - name: influxdb
         image: ft_services/influxdb
         imagePullPolicy: Never
+        volumeMounts:
+        - name: influxdb-volume
+          mountPath: /var/lib/influxdb

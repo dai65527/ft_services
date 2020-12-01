@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 15:29:06 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:26:59 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/01 10:26:19 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,11 +35,11 @@ RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
             telegraf@testing
 
 # mysql config
-RUN     /usr/bin/mysql_install_db --user=mysql \
-                                  --datadir=/var/lib/mysql \
-                                  --auth-root-authentication-method=normal \
-        && sed -i -e s/skip-networking/"# skip-networking"/ \
-        /etc/my.cnf.d/mariadb-server.cnf 
+# RUN     /usr/bin/mysql_install_db --user=mysql \
+#                                   --datadir=/var/lib/mysql \
+#                                   --auth-root-authentication-method=normal \
+RUN     sed -i -e s/skip-networking/"# skip-networking"/ \
+            /etc/my.cnf.d/mariadb-server.cnf 
 
 # telegraf config
 RUN     sed -i \
