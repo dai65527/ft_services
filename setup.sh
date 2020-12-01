@@ -15,7 +15,7 @@
 ## build each containers
 docker build -t ft_services/wordpress ./srcs/wordpress
 docker build -t ft_services/phpmyadmin ./srcs/phpmyadmin
-docker build -t ft_services/nginx --no-cache ./srcs/nginx
+docker build -t ft_services/nginx ./srcs/nginx
 docker build -t ft_services/mysql ./srcs/mysql
 docker build -t ft_services/ftps ./srcs/ftps
 docker build -t ft_services/grafana ./srcs/grafana
