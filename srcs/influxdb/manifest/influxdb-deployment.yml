@@ -6,14 +6,14 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 20:11:04 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 21:20:14 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: influxdb-deploy
+  name: influxdb
 spec:
   selector:
     matchLabels:
