@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/20 20:18:04 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 09:54:31 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,3 +27,14 @@ spec:
       - name: wordpress
         image: ft_services/wordpress
         imagePullPolicy: Never
+        ports:
+        - containerPort: 5050
+        livenessProbe:
+          httpGet:
+            path: /
+            port: 5050
+            scheme: HTTPS
+          initialDelaySeconds: 15
+          periodSeconds: 5
+          timeoutSeconds: 15
+

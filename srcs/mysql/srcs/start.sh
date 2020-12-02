@@ -11,9 +11,6 @@
 #                                                                              #
 # **************************************************************************** #
 
-echo =====
-    ls /var/lib/mysql
-echo =====
 # If no mysql data directory (means firsttime to launch), initialize.
 if [ ! -d /var/lib/mysql/wordpress ]; then
 /usr/bin/mysql_install_db --user=mysql \
@@ -38,13 +35,7 @@ FLUSH PRIVILEGES ;
 EOF
     /usr/bin/mysqld --user=mysql --bootstrap < init.sql
     rm -f init.sql
-echo =====
-    ls /var/lib/mysql
-echo =====
 fi
-echo =====
-ls /var/lib/mysql
-echo =====
 
 # telegraf conf
 sed -i \

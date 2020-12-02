@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/27 19:45:40 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 15:46:06 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,3 +34,11 @@ spec:
         volumeMounts:
         - name: influxdb-volume
           mountPath: /var/lib/influxdb
+        livenessProbe:
+          httpGet:
+            path: /ping
+            port: 8086
+            scheme: HTTP
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5

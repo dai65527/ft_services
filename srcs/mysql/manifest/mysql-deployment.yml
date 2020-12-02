@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/27 17:37:09 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 09:48:51 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,3 +34,9 @@ spec:
         volumeMounts:
         - name: mysql-volume
           mountPath: /var/lib/mysql
+        livenessProbe:
+          exec:
+            command: ["mysqladmin", "ping", "-u", "\"$DB_ROOTUSER\"", "--password=\"$DB_ROOTPASS\""]
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5

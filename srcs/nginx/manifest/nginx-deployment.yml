@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 09:10:53 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 16:35:09 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,10 +31,8 @@ spec:
         - containerPort: 80
         - containerPort: 443
         livenessProbe:
-          httpGet:
-            path: /
-            port: 443
-            scheme: HTTPS
+          exec:
+            command: ["/liveness.sh"]
           initialDelaySeconds: 10
           periodSeconds: 5
           timeoutSeconds: 5

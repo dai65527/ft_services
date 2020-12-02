@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:26:34 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 16:34:19 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,10 @@ RUN     sed -i \
 # set start.sh
 COPY    ./srcs/start.sh /start.sh
 RUN     chmod 744 /start.sh
+
+# set liveness.sh
+COPY    ./srcs/liveness.sh /liveness.sh
+RUN     chmod 744 /liveness.sh
 
 # copy login message
 COPY    ./srcs/login_message.txt /tmp

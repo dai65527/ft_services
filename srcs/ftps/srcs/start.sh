@@ -26,7 +26,7 @@ fi
 
 # add user for test connection
 if [ ! -d /home/$FTP_USER ]; then
-    echo -e "$FTP_USER_PASS\n$FTP_USER_PASS" | adduser $FTP_USER
+    echo -e "$FTP_USER_PASS\n$FTP_USER_PASS" | adduser $FTP_USER > /dev/null
 fi
 
 # telegraf conf

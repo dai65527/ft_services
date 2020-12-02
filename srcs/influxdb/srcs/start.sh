@@ -40,13 +40,5 @@ sed -i \
     -e s/"# password = \"metricsmetricsmetricsmetrics\""/"password = \"$INFDB_TELEGRAF_PASS\""/ \
     /etc/telegraf.conf
 
-echo "--"
-ls /var/lib/influxdb
-echo "--"
-ls /var/lib/influxdb/data
-echo "--"
-ls /var/lib/influxdb/meta
-echo "--"
-
 # start telegraf server
 telegraf --config /etc/telegraf.conf
