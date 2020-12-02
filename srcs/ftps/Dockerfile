@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 17:55:57 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:25:58 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 13:29:19 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,8 +39,10 @@ RUN     sed -i \
             -e s/"#write_enable=YES"/"write_enable=YES"/ \
             /etc/vsftpd/vsftpd.conf \
         && echo seccomp_sandbox=NO >> /etc/vsftpd/vsftpd.conf \
+        && echo pasv_enable=YES >> /etc/vsftpd/vsftpd.conf \
         && echo pasv_min_port=60000 >> /etc/vsftpd/vsftpd.conf \
         && echo pasv_max_port=60002 >> /etc/vsftpd/vsftpd.conf \
+        && echo pasv_promiscuous=YES >> /etc/vsftpd/vsftpd.conf \
         && echo log_ftp_protocol=YES >> /etc/vsftpd/vsftpd.conf \
         && echo debug_ssl=YES >> /etc/vsftpd/vsftpd.conf \
         && echo vsftpd_log_file=/var/log/vsftpd.log >> /etc/vsftpd/vsftpd.conf \
