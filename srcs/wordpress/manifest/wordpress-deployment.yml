@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 21:20:51 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/03 00:33:30 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,11 +31,11 @@ spec:
         - containerPort: 5050
         livenessProbe:
           httpGet:
-            path: /
+            path: /health/
             port: 5050
             scheme: HTTPS
-          initialDelaySeconds: 15
-          periodSeconds: 5
+          initialDelaySeconds: 20
+          periodSeconds: 10
           timeoutSeconds: 15
         env:
         - name: MYSQL_HOST
@@ -68,3 +68,48 @@ spec:
             secretKeyRef:
               name: ft-services-secret
               key: infdb_telegraf_pass
+        - name: WP_ADMIN_NAME
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_admin_name
+        - name: WP_ADMIN_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_admin_email
+        - name: WP_ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_admin_pass
+        - name: WP_USER1_NAME
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user1_name
+        - name: WP_USER1_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user1_email
+        - name: WP_USER1_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user1_pass
+        - name: WP_USER2_NAME
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user2_name
+        - name: WP_USER2_EMAIL
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user2_email
+        - name: WP_USER2_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: wp_user2_pass
