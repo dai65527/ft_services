@@ -39,5 +39,8 @@ kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manife
 ### (On first install only)
 kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
+# create secret for ft_services
+kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_services.env-file
+
 # apply kubernetes manifests
 ./srcs/scripts/apply.sh

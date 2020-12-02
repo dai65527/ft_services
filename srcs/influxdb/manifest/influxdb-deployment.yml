@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 15:46:06 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 20:11:04 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -42,3 +42,34 @@ spec:
           initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 5
+        env:
+        - name: INFDB_ADMIN_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_admin_user
+        - name: INFDB_ADMIN_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_admin_pass
+        - name: INFDB_TELEGRAF_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_user
+        - name: INFDB_TELEGRAF_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_pass
+        - name: INFDB_GRAFANA_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_grafana_user
+        - name: INFDB_GRAFANA_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_grafana_pass

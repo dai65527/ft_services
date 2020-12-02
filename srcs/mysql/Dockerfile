@@ -6,19 +6,19 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 15:29:06 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/01 10:26:19 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 19:37:49 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM    alpine:latest
 
 # default password for root user and sys
-ENV     DB_ROOTPASS=rootpass
+ENV     MYSQL_ROOTPASS=rootpass
 
 # database and user for wordpress
-ENV     WP_DBNAME wordpress
-ENV     WP_DBUSER wpdbuser
-ENV     WP_DBPASS wpdbpass
+ENV     WP_MYSQLDBNAME wordpress
+ENV     WP_MYSQLUSER wpdbuser
+ENV     WP_MYSQLPASS wpdbpass
 
 # user and pass of influxdb for telegraf
 ENV     INFDB_TELEGRAF_USER telegraf

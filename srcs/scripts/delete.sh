@@ -21,12 +21,4 @@ kubectl delete -f ./srcs/influxdb/manifest
 kubectl delete -f ./srcs/grafana/manifest
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-
-# kubectl delete -f ./srcs/wordpress/manifest -n metallb-system 
-# kubectl delete -f ./srcs/wordpress/manifest -n metallb-system
-# kubectl delete -f ./srcs/phpmyadmin/manifest -n metallb-system
-# kubectl delete -f ./srcs/nginx/manifest -n metallb-system
-# kubectl delete -f ./srcs/mysql/manifest -n metallb-system
-# kubectl delete -f ./srcs/ftps/manifest -n metallb-system
-# kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
-# kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl delete secret ft-services-secret

@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 16:34:19 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 19:41:56 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,9 +14,9 @@
 FROM    alpine:latest
 
 # env
-ENV     USER_SSH user42
-ENV     USER_SSH_PASS user42
-ENV     LOGIN_TITLE FT_SERVICES
+ENV     SSHUSER user42
+ENV     SSHUSER_PASS user42
+ENV     SSH_LOGINTITLE FT_SERVICES
 
 # user and pass of influxdb for telegraf
 ENV     INFDB_TELEGRAF_USER telegraf

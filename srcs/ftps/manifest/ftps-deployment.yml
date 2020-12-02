@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/21 08:02:32 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 13:38:09 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 20:03:04 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,3 +39,24 @@ spec:
           timeoutSeconds: 10
           tcpSocket:
             port: 21
+        env:
+        - name: INFDB_TELEGRAF_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_user
+        - name: INFDB_TELEGRAF_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_pass
+        - name: FTP_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: ftp_user
+        - name: FTP_USER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: ftp_user_pass

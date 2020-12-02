@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 21:14:47 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 09:17:11 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 20:27:26 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,3 +37,19 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
           timeoutSeconds: 5
+        env:
+        - name: MYSQL_HOST
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: mysql_host
+        - name: INFDB_TELEGRAF_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_user
+        - name: INFDB_TELEGRAF_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_pass

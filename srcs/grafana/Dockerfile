@@ -6,17 +6,15 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 13:42:21 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/26 18:44:51 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 19:34:16 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 FROM    alpine:latest
 
 # env vars for config
-ENV     GRAFANA_DBUSER user42
-ENV     GRAFANA_DBPASS user42
-
-# user and pass of influxdb for telegraf
+ENV     INFDB_GRAFANA_USER grafana
+ENV     INFDB_GRAFANA_PASS grafanapass
 ENV     INFDB_TELEGRAF_USER telegraf
 ENV     INFDB_TELEGRAF_PASS telegrafpass
 

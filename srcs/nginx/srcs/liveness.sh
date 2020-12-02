@@ -20,4 +20,3 @@ if [ $RETURN_NGINX = 0 ] && [ $RETURN_SSHD = 0 ]; then
 else
 	exit 1
 fi
-

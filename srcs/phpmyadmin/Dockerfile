@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/27 08:00:51 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 19:44:31 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 FROM    alpine:latest
 
 # setting of database for phpmyadmin
-ENV     DBHOST mysql
+ENV     MYSQL_HOST mysql
 
 # user and pass of influxdb for telegraf
 ENV     INFDB_TELEGRAF_USER telegraf

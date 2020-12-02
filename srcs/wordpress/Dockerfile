@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/25 19:26:55 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 20:29:40 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,10 +14,10 @@
 FROM    alpine:latest
 
 # setting of database for wordpress (used to make wp-config.php in start.sh)
-ENV     WP_DBNAME wordpress
-ENV     WP_DBUSER wpdbuser
-ENV     WP_DBPASS wpdbpass
-ENV     WP_DBHOST mysql
+ENV     MYSQL_HOST mysql
+ENV     WP_MYSQLDBNAME wordpress
+ENV     WP_MYSQLUSER wpdbuser
+ENV     WP_MYSQLPASS wpdbpass
 
 # user and pass of influxdb for telegraf
 ENV     INFDB_TELEGRAF_USER telegraf

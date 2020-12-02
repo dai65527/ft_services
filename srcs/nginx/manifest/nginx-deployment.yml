@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 16:35:09 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 20:22:56 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,3 +36,29 @@ spec:
           initialDelaySeconds: 10
           periodSeconds: 5
           timeoutSeconds: 5
+        env:
+        - name: INFDB_TELEGRAF_USER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_user
+        - name: INFDB_TELEGRAF_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: infdb_telegraf_pass
+        - name: SSH_LOGINTITLE
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: ssh_logintitle
+        - name: SSHUSER
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: sshuser
+        - name: SSHUSER_PASS
+          valueFrom:
+            secretKeyRef:
+              name: ft-services-secret
+              key: sshuser_pass

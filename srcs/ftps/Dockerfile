@@ -6,17 +6,16 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/19 17:55:57 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 13:29:19 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/02 19:27:55 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # use alpine as baseimage
 FROM    alpine:latest
 
+# ftpuser
 ENV     FTP_USER user42
 ENV     FTP_USER_PASS user42
-ENV     INFDB_TELEGRAF_USER telegraf
-ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # user and pass of influxdb for telegraf
 ENV     INFDB_TELEGRAF_USER telegraf

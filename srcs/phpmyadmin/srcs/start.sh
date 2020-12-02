@@ -12,7 +12,7 @@
 # **************************************************************************** #
 
 if [ ! -f /var/lib/nginx/html/config.inc.php ]; then
-    sed -e s/localhost/$DBHOST/ /var/lib/nginx/html/config.sample.inc.php \
+    sed -e s/localhost/$MYSQL_HOST/ /var/lib/nginx/html/config.sample.inc.php \
         > /var/lib/nginx/html/config.inc.php
     chmod 744 /var/lib/nginx/html/config.inc.php
     chown nginx:nginx /var/lib/nginx/html

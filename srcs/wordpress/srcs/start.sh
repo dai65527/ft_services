@@ -12,10 +12,10 @@
 # **************************************************************************** #
 
 if [ ! -f /var/lib/nginx/html/wp-config.php ]; then
-    sed -e s/database_name_here/$WP_DBNAME/ \
-        -e s/username_here/$WP_DBUSER/ \
-        -e s/password_here/$WP_DBPASS/ \
-        -e s/localhost/$WP_DBHOST/ \
+    sed -e s/database_name_here/$WP_MYSQLDBNAME/ \
+        -e s/username_here/$WP_MYSQLUSER/ \
+        -e s/password_here/$WP_MYSQLPASS/ \
+        -e s/localhost/$MYSQL_HOST/ \
         /var/lib/nginx/html/wp-config-sample.php \
         > /var/lib/nginx/html/wp-config.php
 fi
