@@ -14,7 +14,7 @@
 # apply k8s manifest of ft_services container
 kubectl apply -f ./srcs/influxdb/manifest
 kubectl apply -f ./srcs/grafana/manifest
-kubectl apply -f srcs/metallb/metallb-config.yml
+kubectl apply -f ./srcs/metallb/metallb-config.yml
 kubectl apply -f ./srcs/wordpress/manifest
 kubectl apply -f ./srcs/phpmyadmin/manifest
 kubectl apply -f ./srcs/nginx/manifest
