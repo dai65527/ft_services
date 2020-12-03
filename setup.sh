@@ -11,6 +11,12 @@
 #                                                                              #
 # **************************************************************************** #
 
+# start minikube
+sudo chmod 777 -R ~/.kube
+sudo chmod 777 -R ~/.minikube
+sudo minikube start --driver=none
+sudo chmod 777 -R ~/.minikube
+
 # build docker image
 ## build each containers
 docker build -t ft_services/wordpress ./srcs/wordpress
@@ -44,3 +50,6 @@ kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_s
 
 # apply kubernetes manifests
 ./srcs/scripts/apply.sh
+
+# start dashboard
+sudo minikube dashboard

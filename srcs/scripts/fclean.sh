@@ -2,21 +2,23 @@
 # **************************************************************************** #
 #                                                                              #
 #                                                         :::      ::::::::    #
-#    apply.sh                                           :+:      :+:    :+:    #
+#    fclean.sh                                          :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2020/11/21 09:42:24 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/02 09:42:24 by dnakano          ###   ########.fr        #
+#    Created: 2020/12/03 08:09:25 by dnakano           #+#    #+#              #
+#    Updated: 2020/12/03 08:09:25 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# apply k8s manifest of ft_services container
-kubectl apply -f ./srcs/influxdb/manifest
-kubectl apply -f ./srcs/grafana/manifest
-kubectl apply -f srcs/metallb/metallb-config.yml
-kubectl apply -f ./srcs/wordpress/manifest
-kubectl apply -f ./srcs/phpmyadmin/manifest
-kubectl apply -f ./srcs/nginx/manifest
-kubectl apply -f ./srcs/mysql/manifest
-kubectl apply -f ./srcs/ftps/manifest
+# delete k8s manifest
+./delete.sh
+
+# remove docker image
+docker rmi ft_services/wordpress
+docker rmi ft_services/phpmyadmin
+docker rmi ft_services/nginx
+docker rmi ft_services/mysql
+docker rmi ft_services/ftps
+docker rmi ft_services/grafana
+docker rmi ft_services/influxdb
