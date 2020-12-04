@@ -31,26 +31,26 @@ docker build -t ft_services/influxdb ./srcs/influxdb
 # setup metallb (https://metallb.universe.tf/installation/)
 ## enable strict ARP mode (needed)
 ### display what would be changed
-sudo kubectl get configmap kube-proxy -n kube-system -o yaml | \
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
 sed -e "s/strictARP: false/strictARP: true/" \
     -e s/'mode: ""'/'mode: "ipvs"'/ | \
-sudo kubectl diff -f - -n kube-system
+kubectl diff -f - -n kube-system
 ### apply change
-sudo kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sudo sed -e "s/strictARP: false/strictARP: true/" \
+kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sed -e "s/strictARP: false/strictARP: true/" \
     -e s/'mode: ""'/'mode: "ipvs"'/ | \
-sudo kubectl apply -f - -n kube-system
+kubectl apply -f - -n kube-system
 ### install metallb by manifest 
-sudo kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-sudo kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 ### (On first install only)
-sudo kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
 # create secret for ft_services
-sudo kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_services.env-file
+kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_services.env-file
 
 # apply kubernetes manifests
-sudo ./srcs/scripts/apply.sh
+./srcs/scripts/apply.sh
 
 # start dashboard
 sudo minikube dashboard
