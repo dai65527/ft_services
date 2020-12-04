@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 21:20:32 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/05 00:57:20 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,7 @@ spec:
         livenessProbe:
           exec:
             command: ["/liveness.sh"]
-          initialDelaySeconds: 10
+          initialDelaySeconds: 30
           periodSeconds: 5
           timeoutSeconds: 5
         env:

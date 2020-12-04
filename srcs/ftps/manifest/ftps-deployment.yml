@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/21 08:02:32 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 21:18:15 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/05 00:56:45 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ spec:
         - containerPort: 60002
         - containerPort: 60003
         livenessProbe:
-          initialDelaySeconds: 15
+          initialDelaySeconds: 30
           periodSeconds: 5
           timeoutSeconds: 10
           tcpSocket:

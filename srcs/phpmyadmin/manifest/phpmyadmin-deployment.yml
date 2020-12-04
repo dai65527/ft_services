@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 21:14:47 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 21:20:43 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/05 00:57:29 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ spec:
             path: /
             port: 5000
             scheme: HTTPS
-          initialDelaySeconds: 10
+          initialDelaySeconds: 30
           periodSeconds: 5
           timeoutSeconds: 5
         env:

@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/20 18:52:08 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/03 00:33:30 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/05 00:57:33 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ spec:
             path: /health/
             port: 5050
             scheme: HTTPS
-          initialDelaySeconds: 20
+          initialDelaySeconds: 30
           periodSeconds: 10
           timeoutSeconds: 15
         env:
