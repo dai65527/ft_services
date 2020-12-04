@@ -11,6 +11,11 @@
 #                                                                              #
 # **************************************************************************** #
 
+if [ ! -d ./srcs/scripts ]; then
+    echo "this scripts must be executed from ROOT of the REPOSITORY!!"
+    return 1
+fi
+
 # apply k8s manifest of ft_services container
 kubectl apply -f ./srcs/influxdb/manifest
 kubectl apply -f ./srcs/grafana/manifest

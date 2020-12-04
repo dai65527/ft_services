@@ -11,14 +11,19 @@
 #                                                                              #
 # **************************************************************************** #
 
+if [ ! -d ./srcs/scripts ]; then
+    echo "this scripts must be executed from ROOT of the REPOSITORY!!"
+    return 1
+fi
+
 # clean up kubernetes clusters
-kubectl delete -f ../wordpress/manifest
-kubectl delete -f ../phpmyadmin/manifest
-kubectl delete -f ../nginx/manifest
-kubectl delete -f ../mysql/manifest
-kubectl delete -f ../ftps/manifest
-kubectl delete -f ../influxdb/manifest
-kubectl delete -f ../grafana/manifest
+kubectl delete -f ./srcs/wordpress/manifest
+kubectl delete -f ./srcs/phpmyadmin/manifest
+kubectl delete -f ./srcs/nginx/manifest
+kubectl delete -f ./srcs/mysql/manifest
+kubectl delete -f ./srcs/ftps/manifest
+kubectl delete -f ./srcs/influxdb/manifest
+kubectl delete -f ./srcs/grafana/manifest
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 kubectl delete -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
 kubectl delete secret ft-services-secret

@@ -11,8 +11,16 @@
 #                                                                              #
 # **************************************************************************** #
 
+###
+# this scripts must be executed from root of the REPOSITORY!!
+###
+
 # delete k8s manifest
-./delete.sh
+./srcs/scripts/delete.sh 2> /dev/null
+if [ $? -ne 0 ]; then
+    echo "this scripts must be executed from ROOT of the REPOSITORY!!"
+    return 1
+fi
 
 # remove docker image
 docker rmi ft_services/wordpress
