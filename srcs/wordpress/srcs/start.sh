@@ -44,7 +44,7 @@ php-fpm7
 nginx
 
 # Install wordpress with 1 admin user and 2 normal users
-sleep 10
+sleep 20
 wp core install --url=https://192.168.1.200:5050 --title=test --admin_user=$WP_ADMIN_NAME --admin_password=$WP_ADMIN_PASS --admin_email="$WP_ADMIN_EMAIL" --allow-root --path=/var/lib/nginx/html
 wp user create $WP_USER1_NAME $WP_USER1_EMAIL --role=editor --user_pass="$WP_USER1_PASS" --allow-root --path=/var/lib/nginx/html
 wp user create $WP_USER2_NAME $WP_USER2_EMAIL --role=editor --user_pass="$WP_USER2_PASS" --allow-root --path=/var/lib/nginx/html
