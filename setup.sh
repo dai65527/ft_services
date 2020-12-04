@@ -12,10 +12,11 @@
 # **************************************************************************** #
 
 # start minikube
-sudo chmod 777 -R ~/.kube
-sudo chmod 777 -R ~/.minikube
 sudo minikube start --driver=none
-sudo chmod 777 -R ~/.minikube
+
+# change owner of ~/.kube
+sudo chown -R $USER:$USER ~/.kube
+sudo chown -R $USER:$USER ~/.minikube
 
 # build docker image
 ## build each containers
@@ -30,26 +31,26 @@ docker build -t ft_services/influxdb ./srcs/influxdb
 # setup metallb (https://metallb.universe.tf/installation/)
 ## enable strict ARP mode (needed)
 ### display what would be changed
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sudo kubectl get configmap kube-proxy -n kube-system -o yaml | \
 sed -e "s/strictARP: false/strictARP: true/" \
     -e s/'mode: ""'/'mode: "ipvs"'/ | \
-kubectl diff -f - -n kube-system
+sudo kubectl diff -f - -n kube-system
 ### apply change
-kubectl get configmap kube-proxy -n kube-system -o yaml | \
-sed -e "s/strictARP: false/strictARP: true/" \
+sudo kubectl get configmap kube-proxy -n kube-system -o yaml | \
+sudo sed -e "s/strictARP: false/strictARP: true/" \
     -e s/'mode: ""'/'mode: "ipvs"'/ | \
-kubectl apply -f - -n kube-system
+sudo kubectl apply -f - -n kube-system
 ### install metallb by manifest 
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
-kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
+sudo kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/namespace.yaml
+sudo kubectl apply -f https://raw.githubusercontent.com/metallb/metallb/v0.9.5/manifests/metallb.yaml
 ### (On first install only)
-kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
+sudo kubectl create secret generic -n metallb-system memberlist --from-literal=secretkey="$(openssl rand -base64 128)"
 
 # create secret for ft_services
-kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_services.env-file
+sudo kubectl create secret generic ft-services-secret --from-env-file=./srcs/env/ft_services.env-file
 
 # apply kubernetes manifests
-./srcs/scripts/apply.sh
+sudo ./srcs/scripts/apply.sh
 
 # start dashboard
 sudo minikube dashboard
