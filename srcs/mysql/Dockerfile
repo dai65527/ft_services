@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/18 15:29:06 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/02 19:37:49 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/22 17:19:40 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,14 +25,14 @@ ENV     INFDB_TELEGRAF_USER telegraf
 ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # Install MariaDB (alternative to MySQL)
-RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+RUN     echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" \
             >> /etc/apk/repositories \
         && apk update && apk add --no-cache \
             mariadb \
             mariadb-client \
             pwgen \
 # install telegraf to store metrix data to influxdb
-            telegraf@testing
+            telegraf@community
 
 # mysql config
 # RUN     /usr/bin/mysql_install_db --user=mysql \

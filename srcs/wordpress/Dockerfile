@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/17 18:59:04 by dnakano           #+#    #+#              #
-#    Updated: 2020/12/03 01:46:36 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/22 17:19:43 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,13 +35,13 @@ ENV     INFDB_TELEGRAF_USER telegraf
 ENV     INFDB_TELEGRAF_PASS telegrafpass
 
 # install nginx and openssl
-RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+RUN     echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" \
             >> /etc/apk/repositories \
         && apk update && apk add --no-cache \
             nginx \
             openssl \
 # install telegraf to store metrix data to influxdb
-            telegraf@testing
+            telegraf@community
 
 # install php and extension package needed by wordpress
 RUN     apk add --no-cache \

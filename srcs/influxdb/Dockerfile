@@ -6,7 +6,7 @@
 #    By: dnakano <dnakano@student.42tokyo.jp>       +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/11/22 11:55:38 by dnakano           #+#    #+#              #
-#    Updated: 2020/11/28 07:48:46 by dnakano          ###   ########.fr        #
+#    Updated: 2020/12/22 17:19:38 by dnakano          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,12 +20,12 @@ ENV     INFDB_GRAFANA_USER grafana
 ENV     INFDB_GRAFANA_PASS grafanapass
 
 # install influxdb
-RUN     echo "@testing http://dl-cdn.alpinelinux.org/alpine/edge/testing" \
+RUN     echo "@community http://dl-cdn.alpinelinux.org/alpine/edge/community" \
             >> /etc/apk/repositories \
         && apk update && apk add --no-cache \
             influxdb \
 # install telegraf to store metrix data to influxdb
-            telegraf@testing
+            telegraf@community
 
 # influxdb config
 ## add default admin user
